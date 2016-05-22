@@ -1,0 +1,21 @@
+COMPARISON OF FILES BETWEEN FOLDERS:
+	FOLDER 1: C:\Users\Andy\Desktop\filecmp_report\tests\control_data_1\Data Folder
+	FOLDER 2: C:\Users\Andy\Desktop\filecmp_report\tests\control_data_2\Data Folder
+
+
+FILES ONLY IN: C:\Users\Andy\Desktop\filecmp_report\tests\control_data_1\Data Folder
+	./test_text.txt
+	./test_empty_folder
+	./test_word.docx
+	./test_folder/test_image.bmp
+
+
+FILES ONLY IN: C:\Users\Andy\Desktop\filecmp_report\tests\control_data_2\Data Folder
+	None
+
+
+FILES IN BOTH FOLDERS:
+	./test_powerpoint.pptx
+	./test_excel.xlsx
+	./test_zip.zip
+	./test_folder/test_folder_text.txt
