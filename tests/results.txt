@@ -5,8 +5,8 @@ COMPARISON OF FILES BETWEEN FOLDERS:
 
 FILES ONLY IN: .\tests\control_data_1\Data Folder
 	./test_empty_folder
-	./test_text.txt
 	./test_word.docx
+	./test_text.txt
 	./test_folder/test_image.bmp
 
 
@@ -15,7 +15,7 @@ FILES ONLY IN: .\tests\control_data_2\Data Folder
 
 
 FILES IN BOTH FOLDERS:
-	./test_excel.xlsx
 	./test_powerpoint.pptx
 	./test_zip.zip
+	./test_excel.xlsx
 	./test_folder/test_folder_text.txt

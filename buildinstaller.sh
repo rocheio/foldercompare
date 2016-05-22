@@ -1,0 +1,1 @@
+pyinstaller ./gui.py -y
