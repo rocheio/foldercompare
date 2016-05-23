@@ -3,7 +3,6 @@
 import csv
 import filecmp
 
-
 def compare(folder1, folder2, output, output_type='both'):
     """Compare the contents of two folders and report it to a file."""
 
@@ -29,6 +28,9 @@ def recursive_dircmp_report(folder1, folder2, prefix='.'):
         'right': [r'{}/{}'.format(prefix, i) for i in comparison.right_only],
         'both': [r'{}/{}'.format(prefix, i) for i in comparison.common_files],
     }
+
+    for datalist in data.values():
+        datalist.sort()
 
     if comparison.common_dirs:
         for folder in comparison.common_dirs:
@@ -114,11 +116,3 @@ def write_to_csv(folder1, folder2, output, report):
 
             csv_writer.writerow(row)
             row_index += 1
-
-
-if __name__ == '__main__':
-    # Run the program with test data
-    FOLDER1 = r'.\tests\control_data_1\Data Folder'
-    FOLDER2 = r'.\tests\control_data_2\Data Folder'
-    RESULTS_FILE = r'.\tests\results'
-    compare(FOLDER1, FOLDER2, RESULTS_FILE, output_type='both')

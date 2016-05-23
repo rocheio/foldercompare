@@ -49,7 +49,7 @@ class FolderComparisonGUI(tk.Frame):
 
         tk.Button(
             self, text='Select Folder 1',
-            command= lambda: self.set_directory(self.folder1),
+            command=lambda: self.set_directory(self.folder1),
             ).pack(**self.button_options)
 
         tk.Label(
@@ -58,7 +58,7 @@ class FolderComparisonGUI(tk.Frame):
 
         tk.Button(
             self, text='Select Folder 2',
-            command= lambda: self.set_directory(self.folder2),
+            command=lambda: self.set_directory(self.folder2),
             ).pack(**self.button_options)
 
         tk.Label(
@@ -67,7 +67,7 @@ class FolderComparisonGUI(tk.Frame):
 
         tk.Button(
             self, text='Select Output Folder',
-            command= lambda: self.set_directory(self.folder_output),
+            command=lambda: self.set_directory(self.folder_output),
             ).pack(**self.button_options)
 
         tk.Label(
@@ -161,7 +161,9 @@ class FolderComparisonGUI(tk.Frame):
                 foldercompare.compare(self.folder1.get(), self.folder2.get(),
                                       output_filename, output_type=output_type)
             except Exception:
-                messagebox.showerror("Error", "An error has occured")
+                messagebox.showerror(
+                    "Error", "An error has occured, please try again."
+                    )
             else:
                 messagebox.showinfo("Success", "Folder comparison complete")
 
