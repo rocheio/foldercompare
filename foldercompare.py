@@ -1,4 +1,4 @@
-"""Compare the content of two folders and create reports of results."""
+"""Compare the content of two folders and create report(s) of result."""
 
 import csv
 import filecmp
@@ -50,7 +50,7 @@ def recursive_dircmp_report(folder1, folder2, prefix='.'):
 
 
 def write_to_plain_text(folder1, folder2, output, report):
-    """Write the comparison data to a plain text file."""
+    """Write the comparison report to a plain text file."""
 
     filename = output + '.txt'
     with open(filename, 'w') as file:
@@ -81,7 +81,7 @@ def write_to_plain_text(folder1, folder2, output, report):
 
 
 def write_to_csv(folder1, folder2, output, report):
-    """Write the comparison data to a CSV file for use in Excel."""
+    """Write the comparison report to a CSV file for use in Excel."""
 
     filename = output + '.csv'
     with open(filename, 'w') as file:

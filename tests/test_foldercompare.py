@@ -6,8 +6,11 @@ import unittest
 
 import foldercompare
 
-class TestCompareRegression(unittest.TestCase):
-    """Test the compare function with known inputs and expected outputs."""
+class TestCompare(unittest.TestCase):
+    """Test the compare function with known inputs and expected outputs.
+
+    Serves as a regression and integration test for the entire module.
+    """
 
     def setUp(self):
         """Set test input data and expected control outputs."""
@@ -54,6 +57,13 @@ class TestCompareRegression(unittest.TestCase):
                              self.controlresults + '.csv',
                              shallow=False)
         self.assertTrue(result)
+
+    def test_compare_bad_mode(self):
+        """Can not provide an unsupported comparison mode."""
+
+        with self.assertRaises(ValueError):
+            foldercompare.compare(self.folder1, self.folder2,
+                                  self.resultfile, output_type='badparam')
 
     def tearDown(self):
         """Delete test files after each run."""
