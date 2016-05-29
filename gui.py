@@ -20,8 +20,8 @@ class FolderComparisonGUI(tk.Frame):
         self.folder2 = tk.StringVar()
         self.folder_output = tk.StringVar()
         self.filename = tk.StringVar()
-        self.output_as_text = tk.BooleanVar()
-        self.output_as_text.set(1)
+        self.output_as_txt = tk.BooleanVar()
+        self.output_as_txt.set(1)
         self.output_as_csv = tk.BooleanVar()
         self.output_as_csv.set(1)
 
@@ -87,7 +87,7 @@ class FolderComparisonGUI(tk.Frame):
             ).pack()
 
         tk.Checkbutton(
-            self, text='.txt', variable=self.output_as_text,
+            self, text='.txt', variable=self.output_as_txt,
             ).pack()
 
         tk.Checkbutton(
@@ -126,7 +126,7 @@ class FolderComparisonGUI(tk.Frame):
         folder2_is_valid = os.path.exists(self.folder2.get())
         folder_output_is_valid = os.path.exists(self.folder_output.get())
         output_name_valid = self.filename.get()
-        output_type_selected = (self.output_as_text.get() or
+        output_type_selected = (self.output_as_txt.get() or
                                 self.output_as_csv.get())
 
         # Show error if validation failed
@@ -148,18 +148,12 @@ class FolderComparisonGUI(tk.Frame):
             filename = self.filename.get().split('.')[0]
             output_filename = os.path.join(folder, filename)
 
-            # Determine output type(s) from checkboxes
-            if self.output_as_text.get() and self.output_as_csv.get():
-                output_type = 'both'
-            elif self.output_as_text.get():
-                output_type = 'txt'
-            elif self.output_as_csv.get():
-                output_type = 'csv'
-
             # Run the folder compare program
             try:
                 foldercompare.compare(self.folder1.get(), self.folder2.get(),
-                                      output_filename, output_type=output_type)
+                                      output_filename,
+                                      output_txt=self.output_as_txt.get(),
+                                      output_csv=self.output_as_csv.get())
             except Exception:
                 messagebox.showerror(
                     "Error", "An error has occured, please try again."

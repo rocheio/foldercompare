@@ -3,22 +3,19 @@
 import csv
 import filecmp
 
-def compare(folder1, folder2, output, output_type='both'):
-    """Compare the contents of two folders and report it to a file."""
+def compare(folder1, folder2, output, output_txt=False, output_csv=False):
+    """Compare contents of two folders and write a report of the results."""
 
-    if output_type not in ('txt', 'csv', 'both'):
-        raise ValueError('Value must be "txt", "csv", or "both".')
+    report = _recursive_dircmp(folder1, folder2)
 
-    report = recursive_dircmp_report(folder1, folder2)
+    if output_txt:
+        _write_to_plain_text(folder1, folder2, output, report)
 
-    if output_type in ('txt', 'both'):
-        write_to_plain_text(folder1, folder2, output, report)
-
-    if output_type in ('csv', 'both'):
-        write_to_csv(folder1, folder2, output, report)
+    if output_csv:
+        _write_to_csv(folder1, folder2, output, report)
 
 
-def recursive_dircmp_report(folder1, folder2, prefix='.'):
+def _recursive_dircmp(folder1, folder2, prefix='.'):
     """Return a recursive dircmp comparison report as a dictionary."""
 
     comparison = filecmp.dircmp(folder1, folder2)
@@ -40,7 +37,7 @@ def recursive_dircmp_report(folder1, folder2, prefix='.'):
             # Compare common folder and add results to the report
             sub_folder1 = folder1 + '/' + folder
             sub_folder2 = folder2 + '/' + folder
-            sub_report = recursive_dircmp_report(sub_folder1, sub_folder2, prefix)
+            sub_report = _recursive_dircmp(sub_folder1, sub_folder2, prefix)
 
             # Add results from sub_report to main report
             for key, value in sub_report.items():
@@ -49,7 +46,7 @@ def recursive_dircmp_report(folder1, folder2, prefix='.'):
     return data
 
 
-def write_to_plain_text(folder1, folder2, output, report):
+def _write_to_plain_text(folder1, folder2, output, report):
     """Write the comparison report to a plain text file."""
 
     filename = output + '.txt'
@@ -80,7 +77,7 @@ def write_to_plain_text(folder1, folder2, output, report):
             file.write('\tNone\n')
 
 
-def write_to_csv(folder1, folder2, output, report):
+def _write_to_csv(folder1, folder2, output, report):
     """Write the comparison report to a CSV file for use in Excel."""
 
     filename = output + '.csv'
