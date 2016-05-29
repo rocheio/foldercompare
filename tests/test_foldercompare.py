@@ -18,7 +18,7 @@ class TestRecursiveDircmpReport(unittest.TestCase):
         os.mkdir(self.folder2)
 
     @unittest.skip('Fails half the time -- enough to avoid same_files feature')
-    def test_dircmp_diff_files(self):
+    def test_dircmp_diff_files_accuracy(self):
         """Different files are identified as such using filecmp.dircmp()"""
 
         file1 = self.folder1 + r'\hello_world.txt'
@@ -33,7 +33,7 @@ class TestRecursiveDircmpReport(unittest.TestCase):
         self.assertTrue(comparison.diff_files == ['hello_world.txt'])
         self.assertTrue(comparison.same_files == [])
 
-    def test_two_identical_files(self):
+    def test_file_in_both(self):
         """Classifies two identical files as the same."""
 
         file1 = self.folder1 + r'\hello_world.txt'
@@ -48,7 +48,7 @@ class TestRecursiveDircmpReport(unittest.TestCase):
         expected = {'both': ['./hello_world.txt'], 'right': [], 'left': []}
         self.assertEqual(report, expected)
 
-    def test_file_in_one_directory(self):
+    def test_file_only_in_left(self):
         """Classifies file only in one directory."""
 
         file1 = self.folder1 + r'\hello_world.txt'
@@ -57,6 +57,36 @@ class TestRecursiveDircmpReport(unittest.TestCase):
 
         report = foldercompare._recursive_dircmp(self.folder1, self.folder2)
         expected = {'left': ['./hello_world.txt'], 'right': [], 'both': []}
+        self.assertEqual(report, expected)
+
+    def test_subdirectory_only_in_left(self):
+        """Classifies subdirectory with file only in left folder."""
+
+        subdir1 = self.folder1 + r'\subdir'
+        os.mkdir(subdir1)
+
+        file1 = subdir1 + r'\hello_world.txt'
+        with open(file1, 'w') as file:
+            file.write('hello world')
+
+        report = foldercompare._recursive_dircmp(self.folder1, self.folder2)
+        expected = {'left': ['./subdir'], 'right': [], 'both': []}
+        self.assertEqual(report, expected)
+
+    def test_subdir_file_only_in_left(self):
+        """Classifies file only in one subdirectory."""
+
+        subdir1 = self.folder1 + r'\subdir'
+        os.mkdir(subdir1)
+        subdir2 = self.folder2 + r'\subdir'
+        os.mkdir(subdir2)
+
+        file1 = subdir1 + r'\hello_world.txt'
+        with open(file1, 'w') as file:
+            file.write('hello world')
+
+        report = foldercompare._recursive_dircmp(self.folder1, self.folder2)
+        expected = {'left': ['./subdir/hello_world.txt'], 'right': [], 'both': []}
         self.assertEqual(report, expected)
 
     def tearDown(self):
