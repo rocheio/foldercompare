@@ -12,8 +12,8 @@ class TestRecursiveDircmpReport(unittest.TestCase):
 
     def setUp(self):
         """Create two folders for testing."""
-        self.folder1 = r'.\tests\results1'
-        self.folder2 = r'.\tests\results2'
+        self.folder1 = os.path.join('tests', 'results1')
+        self.folder2 = os.path.join('tests', 'results2')
         os.mkdir(self.folder1)
         os.mkdir(self.folder2)
 
@@ -21,11 +21,11 @@ class TestRecursiveDircmpReport(unittest.TestCase):
     def test_dircmp_diff_files_accuracy(self):
         """Different files are identified as such using filecmp.dircmp()"""
 
-        file1 = self.folder1 + r'\hello_world.txt'
+        file1 = os.path.join(self.folder1, 'hello_world.txt')
         with open(file1, 'w') as file:
             file.write('foo')
 
-        file2 = self.folder2 + r'\hello_world.txt'
+        file2 = os.path.join(self.folder2, 'hello_world.txt')
         with open(file2, 'w') as file:
             file.write('bar')
 
@@ -36,11 +36,11 @@ class TestRecursiveDircmpReport(unittest.TestCase):
     def test_file_in_both(self):
         """Classifies two identical files as the same."""
 
-        file1 = self.folder1 + r'\hello_world.txt'
+        file1 = os.path.join(self.folder1, 'hello_world.txt')
         with open(file1, 'w') as file:
             file.write('hello world')
 
-        file2 = self.folder2 + r'\hello_world.txt'
+        file2 = os.path.join(self.folder2, 'hello_world.txt')
         with open(file2, 'w') as file:
             file.write('hello world')
 
@@ -51,7 +51,7 @@ class TestRecursiveDircmpReport(unittest.TestCase):
     def test_file_only_in_left(self):
         """Classifies file only in one directory."""
 
-        file1 = self.folder1 + r'\hello_world.txt'
+        file1 = os.path.join(self.folder1, 'hello_world.txt')
         with open(file1, 'w') as file:
             file.write('hello world')
 
@@ -62,10 +62,10 @@ class TestRecursiveDircmpReport(unittest.TestCase):
     def test_subdirectory_only_in_left(self):
         """Classifies subdirectory with file only in left folder."""
 
-        subdir1 = self.folder1 + r'\subdir'
+        subdir1 = os.path.join(self.folder1, 'subdir')
         os.mkdir(subdir1)
 
-        file1 = subdir1 + r'\hello_world.txt'
+        file1 = os.path.join(subdir1, 'hello_world.txt')
         with open(file1, 'w') as file:
             file.write('hello world')
 
@@ -76,12 +76,12 @@ class TestRecursiveDircmpReport(unittest.TestCase):
     def test_subdir_file_only_in_left(self):
         """Classifies file only in one subdirectory."""
 
-        subdir1 = self.folder1 + r'\subdir'
+        subdir1 = os.path.join(self.folder1, 'subdir')
         os.mkdir(subdir1)
-        subdir2 = self.folder2 + r'\subdir'
+        subdir2 = os.path.join(self.folder2, 'subdir')
         os.mkdir(subdir2)
 
-        file1 = subdir1 + r'\hello_world.txt'
+        file1 = os.path.join(subdir1, 'hello_world.txt')
         with open(file1, 'w') as file:
             file.write('hello world')
 
@@ -101,10 +101,10 @@ class TestCompareRegression(unittest.TestCase):
     def setUp(self):
         """Set test input data and expected control outputs."""
 
-        self.folder1 = r'.\tests\control_data_1\Data Folder'
-        self.folder2 = r'.\tests\control_data_2\Data Folder'
-        self.resultfile = r'.\tests\results'
-        self.controlresults = r'.\tests\control_results'
+        self.folder1 = os.path.join('.', 'tests', 'control_data_1', 'Data Folder')
+        self.folder2 = os.path.join('.', 'tests', 'control_data_2', 'Data Folder')
+        self.resultfile = os.path.join('tests', 'results')
+        self.controlresults = os.path.join('tests', 'control_results')
 
     def test_create_txt(self):
         """Can create a single TXT file, identical to the control."""
