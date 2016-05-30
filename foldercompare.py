@@ -108,13 +108,13 @@ def _write_to_csv(folder1, folder2, output, report):
         row_index = 0
         row_max = max(len(column) for column in data)
         while row_index < row_max:
-            row = []
-            for column_index, _ in enumerate(data):
+            values = []
+            for column in data:
                 # Use data from column if it exists, otherwise use None
                 try:
-                    row += [data[column_index][row_index]]
+                    values += [column[row_index]]
                 except IndexError:
-                    row += [None]
+                    values += [None]
 
-            csv_writer.writerow(row)
+            csv_writer.writerow(values)
             row_index += 1
