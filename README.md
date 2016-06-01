@@ -13,7 +13,7 @@ Uses the Python 3.5 standard library packages [`filecmp`][filecmp] to do the com
 3. Install requirements using `pip install -r requirements.txt`
 4. Run tests using `python -m unittest tests/test_foldercompare.py`
 5. Build the program using the script `./build_exe.sh`
-6. The standalone program is now located at `./dist/foldercompare.exe`
+6. The standalone program is now located in the top-level folder
 
 
 [filecmp]: https://docs.python.org/3.5/library/filecmp.html
