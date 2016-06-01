@@ -4,6 +4,8 @@ A Windows application that compares the content of two folders from a graphic in
 
 [Download the program here][exe-download]
 
+For a detailed description of how and why, check out my [blog post][blog]
+
 ## About
 
 Uses the Python standard library package [`filecmp`][filecmp] to do the comparison and [`tkinter`][tkinter] to build the GUI. [PyInstaller][pyinstaller] is used to package the script into an executable.
@@ -19,6 +21,7 @@ Uses the Python standard library package [`filecmp`][filecmp] to do the comparis
 
 
 [bash-diff]: http://ss64.com/bash/diff.html
+[blog]: https://roche.io/2016/06/01/comparing-folders-python
 [exe-download]: https://raw.githubusercontent.com/rocheio/foldercompare/master/foldercompare.exe
 [filecmp]: https://docs.python.org/3.5/library/filecmp.html
 [pyinstaller]: http://www.pyinstaller.org/
