@@ -6,6 +6,10 @@ A Windows application that compares the content of two folders from a graphic in
 
 For a detailed description of how and why, check out my [blog post][blog]
 
+## Notable Forks
+
+For a more updated version of this program that works with `.zip` files, check out [Juan Biondi's fork](https://github.com/yeyeto2788/foldercompare)
+
 ## About
 
 Uses the Python standard library package [`filecmp`][filecmp] to do the comparison and [`tkinter`][tkinter] to build the GUI. [PyInstaller][pyinstaller] is used to package the script into an executable.
